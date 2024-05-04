@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js'  
 
 import { player } from '../constants/player.js'
-import { worldCamera, worldSize } from '../constants/world.js';
+import { worldCamera, chunkData } from '../constants/world.js';
 
 export class Player {
   #worldVelocity = new THREE.Vector3();
@@ -29,8 +29,7 @@ export class Player {
     this.addGui()
   }
   setupCamera() {
-    console.log(worldSize)
-    this.camera.position.set(worldSize.x / 2, worldSize.y + 1, worldSize.z / 2)
+    this.camera.position.set(chunkData.width / 2, chunkData.height + 1, chunkData.width / 2)
     this.scene.add(this.camera)
     this.cameraHelper.visible = false
     this.scene.add(this.cameraHelper)

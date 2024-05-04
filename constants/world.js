@@ -1,9 +1,3 @@
-export const worldSize = {
-    x: 100,
-    y: 30,
-    z: 100
-}
-
 export const worldCamera = {
   width: window.innerWidth,
   height: window.innerHeight,
@@ -11,9 +5,15 @@ export const worldCamera = {
   aspectRatio: window.innerWidth / window.innerHeight
 }
 
+export const chunkData = {
+  width: 32,
+  height: 32,
+  drawDistance: 2,
+}
 
 
 export default {
-  worldSize,
-  worldCamera
+  worldCamera,
+  chunkData,
+
 }

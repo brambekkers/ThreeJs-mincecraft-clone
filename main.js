@@ -3,6 +3,7 @@ import GUI from 'lil-gui'
 
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
+import { chunkData } from './constants/world.js'
 
 // scripts
 import Scene from './scripts/Scene.js'
@@ -24,6 +25,11 @@ const canvas = document.querySelector('#app')
 
 // Create Scene, Camera, renderer
 const scene = new Scene()
+
+// Fog
+const minFog = chunkData.width * chunkData.drawDistance - chunkData.width
+const maxFog = chunkData.width * chunkData.drawDistance - (chunkData.width / 2)
+scene.fog = new THREE.Fog(0x80a0e0, minFog, maxFog)
 const orbitCamera = new Camera({ scene, gui })
 const renderer = new Renderer({ canvas })
 const lights = new Lights({ scene })
@@ -50,8 +56,11 @@ function animate() {
 
   requestAnimationFrame(animate);
 
-
+  // update
   physics.update(deltaTime, player, world)
+  world.update(player)
+  lights.update(player)
+
   const currentCamera = player.controls.isLocked ? player.camera : orbitCamera
   renderer.render(scene, currentCamera);
   stats.update()
